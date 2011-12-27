@@ -7,10 +7,15 @@ function EiffelBrush()
     var control_flow_keywords = 'if then else elseif when from until loop';
     var booleans_keywords = 'and or xor not implies ';
     this.regexList = [
-    { regex: /--(.*)$/gm,                                                      css: 'comments' },
-    { regex: new RegExp(this.getKeywords(classes_keywords), 'gmi'),		       css: 'keyword' },
-    { regex: new RegExp(this.getKeywords(inheritance_keywords), 'gmi'),		   css: 'keyword' },
-    { regex: new RegExp(this.getKeywords(design_by_contract_keywords), 'gmi'), css: 'keyword' },
+    { regex: /\`.*\'/gm, /* reference to feature (usually in comments) */      css: 'keyword italic bold' },
+    { regex: /--(.*)$/gm,  /* comments */                                      css: 'comments' },
+    { regex: /".*"/gm, /* manifest strings */                                  css: 'string' },
+    { regex: /'.i'/gm, /* manifest character */                                css: 'string bold' },
+    { regex: /\b[A-Z][A-Z0-9_]+\b/gm, /* classes */                            css: 'color1 bold'},     
+    //{ regex: //
+    { regex: new RegExp(this.getKeywords(classes_keywords), 'gmi'),		       css: 'keyword bold' },
+    { regex: new RegExp(this.getKeywords(inheritance_keywords), 'gmi'),		   css: 'keyword bold' },
+    { regex: new RegExp(this.getKeywords(design_by_contract_keywords), 'gmi'), css: 'keyword italic' },
     { regex: new RegExp(this.getKeywords(features_body_keywords), 'gmi'),      css: 'keyword' },
     { regex: new RegExp(this.getKeywords(control_flow_keywords), 'gmi'),       css: 'keyword' },
     { regex: new RegExp(this.getKeywords(booleans_keywords), 'gmi'),           css: 'keyword' }	
